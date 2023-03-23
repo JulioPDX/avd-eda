@@ -22,6 +22,7 @@
   - [Service Routing Protocols Model](#service-routing-protocols-model)
   - [IP Routing](#ip-routing)
   - [IPv6 Routing](#ipv6-routing)
+  - [Static Routes](#static-routes)
 - [Multicast](#multicast)
   - [IP IGMP Snooping](#ip-igmp-snooping)
 - [Filters](#filters)
@@ -41,13 +42,13 @@
 
 | Management Interface | description | Type | VRF | IP Address | Gateway |
 | -------------------- | ----------- | ---- | --- | ---------- | ------- |
-| Management0 | oob_management | oob | MGMT | 192.168.0.11/24 | - |
+| Management0 | oob_management | oob | default | 192.168.0.11/24 | 192.168.0.1 |
 
 #### IPv6
 
 | Management Interface | description | Type | VRF | IPv6 Address | IPv6 Gateway |
 | -------------------- | ----------- | ---- | --- | ------------ | ------------ |
-| Management0 | oob_management | oob | MGMT | - | - |
+| Management0 | oob_management | oob | default | - | - |
 
 ### Management Interfaces Device Configuration
 
@@ -56,7 +57,6 @@
 interface Management0
    description oob_management
    no shutdown
-   vrf MGMT
    ip address 192.168.0.11/24
 ```
 
@@ -72,7 +72,7 @@ interface Management0
 
 | VRF Name | IPv4 ACL | IPv6 ACL |
 | -------- | -------- | -------- |
-| MGMT | - | - |
+| default | - | - |
 
 ### Management API HTTP Configuration
 
@@ -82,7 +82,7 @@ management api http-commands
    protocol https
    no shutdown
    !
-   vrf MGMT
+   vrf default
       no shutdown
 ```
 
@@ -234,14 +234,13 @@ service routing protocols model multi-agent
 | VRF | Routing Enabled |
 | --- | --------------- |
 | default | True |
-| MGMT | false |
+| default | false |
 
 ### IP Routing Device Configuration
 
 ```eos
 !
 ip routing
-no ip routing vrf MGMT
 ```
 ## IPv6 Routing
 
@@ -250,7 +249,22 @@ no ip routing vrf MGMT
 | VRF | Routing Enabled |
 | --- | --------------- |
 | default | False |
-| MGMT | false |
+| default | false |
+
+## Static Routes
+
+### Static Routes Summary
+
+| VRF | Destination Prefix | Next Hop IP             | Exit interface      | Administrative Distance       | Tag               | Route Name                    | Metric         |
+| --- | ------------------ | ----------------------- | ------------------- | ----------------------------- | ----------------- | ----------------------------- | -------------- |
+| default | 0.0.0.0/0 | 192.168.0.1 | - | 1 | - | - | - |
+
+### Static Routes Device Configuration
+
+```eos
+!
+ip route 0.0.0.0/0 192.168.0.1
+```
 
 # Multicast
 
@@ -277,13 +291,11 @@ no ip routing vrf MGMT
 
 | VRF Name | IP Routing |
 | -------- | ---------- |
-| MGMT | disabled |
+| default | disabled |
 
 ## VRF Instances Device Configuration
 
 ```eos
-!
-vrf instance MGMT
 ```
 
 # Quality Of Service
