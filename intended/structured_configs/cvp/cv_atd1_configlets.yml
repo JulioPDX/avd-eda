@@ -1,0 +1,154 @@
+CVP_CONFIGLETS:
+  AVD_leaf1: "!RANCID-CONTENT-TYPE: arista\n!\nvlan internal order ascending range\
+    \ 1006 1199\n!\ntransceiver qsfp default-mode 4x10G\n!\nservice routing protocols\
+    \ model multi-agent\n!\nhostname leaf1\n!\nspanning-tree mode mstp\nno spanning-tree\
+    \ vlan-id 4094\nspanning-tree mst 0 priority 16384\n!\nno enable password\nno\
+    \ aaa root\n!\nvlan 10\n   name Ten\n!\nvlan 20\n   name Twenty\n!\nvlan 4094\n\
+    \   name MLAG_PEER\n   trunk group MLAG\n!\nvrf instance MGMT\n!\ninterface Port-Channel1\n\
+    \   description MLAG_PEER_leaf2_Po1\n   no shutdown\n   switchport\n   switchport\
+    \ trunk allowed vlan 2-4094\n   switchport mode trunk\n   switchport trunk group\
+    \ MLAG\n!\ninterface Port-Channel2\n   description SPINE1_Po2\n   no shutdown\n\
+    \   switchport\n   switchport trunk allowed vlan 10,20\n   switchport mode trunk\n\
+    \   mlag 2\n!\ninterface Ethernet1\n   description MLAG_PEER_leaf2_Ethernet1\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Ethernet2\n   description\
+    \ SPINE1_Ethernet2\n   no shutdown\n   channel-group 2 mode active\n!\ninterface\
+    \ Ethernet3\n   description SPINE2_Ethernet2\n   no shutdown\n   channel-group\
+    \ 2 mode active\n!\ninterface Ethernet6\n   description MLAG_PEER_leaf2_Ethernet6\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Management1\n  \
+    \ description oob_management\n   no shutdown\n   vrf MGMT\n   ip address 192.168.0.12/24\n\
+    !\ninterface Vlan4094\n   description MLAG_PEER\n   no shutdown\n   mtu 9000\n\
+    \   no autostate\n   ip address 10.1.253.4/31\n!\nip routing\nno ip routing vrf\
+    \ MGMT\n!\nmlag configuration\n   domain-id pod1\n   local-interface Vlan4094\n\
+    \   peer-address 10.1.253.5\n   peer-link Port-Channel1\n   reload-delay mlag\
+    \ 300\n   reload-delay non-mlag 330\n!\nmanagement api http-commands\n   protocol\
+    \ https\n   no shutdown\n   !\n   vrf MGMT\n      no shutdown\n!\nend\n"
+  AVD_leaf2: "!RANCID-CONTENT-TYPE: arista\n!\nvlan internal order ascending range\
+    \ 1006 1199\n!\ntransceiver qsfp default-mode 4x10G\n!\nservice routing protocols\
+    \ model multi-agent\n!\nhostname leaf2\n!\nspanning-tree mode mstp\nno spanning-tree\
+    \ vlan-id 4094\nspanning-tree mst 0 priority 16384\n!\nno enable password\nno\
+    \ aaa root\n!\nvlan 10\n   name Ten\n!\nvlan 20\n   name Twenty\n!\nvlan 4094\n\
+    \   name MLAG_PEER\n   trunk group MLAG\n!\nvrf instance MGMT\n!\ninterface Port-Channel1\n\
+    \   description MLAG_PEER_leaf1_Po1\n   no shutdown\n   switchport\n   switchport\
+    \ trunk allowed vlan 2-4094\n   switchport mode trunk\n   switchport trunk group\
+    \ MLAG\n!\ninterface Port-Channel2\n   description SPINE1_Po2\n   no shutdown\n\
+    \   switchport\n   switchport trunk allowed vlan 10,20\n   switchport mode trunk\n\
+    \   mlag 2\n!\ninterface Ethernet1\n   description MLAG_PEER_leaf1_Ethernet1\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Ethernet2\n   description\
+    \ SPINE1_Ethernet3\n   no shutdown\n   channel-group 2 mode active\n!\ninterface\
+    \ Ethernet3\n   description SPINE2_Ethernet3\n   no shutdown\n   channel-group\
+    \ 2 mode active\n!\ninterface Ethernet6\n   description MLAG_PEER_leaf1_Ethernet6\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Management1\n  \
+    \ description oob_management\n   no shutdown\n   vrf MGMT\n   ip address 192.168.0.13/24\n\
+    !\ninterface Vlan4094\n   description MLAG_PEER\n   no shutdown\n   mtu 9000\n\
+    \   no autostate\n   ip address 10.1.253.5/31\n!\nip routing\nno ip routing vrf\
+    \ MGMT\n!\nmlag configuration\n   domain-id pod1\n   local-interface Vlan4094\n\
+    \   peer-address 10.1.253.4\n   peer-link Port-Channel1\n   reload-delay mlag\
+    \ 300\n   reload-delay non-mlag 330\n!\nmanagement api http-commands\n   protocol\
+    \ https\n   no shutdown\n   !\n   vrf MGMT\n      no shutdown\n!\nend\n"
+  AVD_leaf3: "!RANCID-CONTENT-TYPE: arista\n!\nvlan internal order ascending range\
+    \ 1006 1199\n!\ntransceiver qsfp default-mode 4x10G\n!\nservice routing protocols\
+    \ model multi-agent\n!\nhostname leaf3\n!\nspanning-tree mode mstp\nno spanning-tree\
+    \ vlan-id 4094\nspanning-tree mst 0 priority 16384\n!\nno enable password\nno\
+    \ aaa root\n!\nvlan 10\n   name Ten\n!\nvlan 20\n   name Twenty\n!\nvlan 4094\n\
+    \   name MLAG_PEER\n   trunk group MLAG\n!\nvrf instance MGMT\n!\ninterface Port-Channel1\n\
+    \   description MLAG_PEER_leaf4_Po1\n   no shutdown\n   switchport\n   switchport\
+    \ trunk allowed vlan 2-4094\n   switchport mode trunk\n   switchport trunk group\
+    \ MLAG\n!\ninterface Port-Channel2\n   description SPINE1_Po4\n   no shutdown\n\
+    \   switchport\n   switchport trunk allowed vlan 10,20\n   switchport mode trunk\n\
+    \   mlag 2\n!\ninterface Ethernet1\n   description MLAG_PEER_leaf4_Ethernet1\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Ethernet2\n   description\
+    \ SPINE1_Ethernet4\n   no shutdown\n   channel-group 2 mode active\n!\ninterface\
+    \ Ethernet3\n   description SPINE2_Ethernet4\n   no shutdown\n   channel-group\
+    \ 2 mode active\n!\ninterface Ethernet6\n   description MLAG_PEER_leaf4_Ethernet6\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Management1\n  \
+    \ description oob_management\n   no shutdown\n   vrf MGMT\n   ip address 192.168.0.14/24\n\
+    !\ninterface Vlan4094\n   description MLAG_PEER\n   no shutdown\n   mtu 9000\n\
+    \   no autostate\n   ip address 10.1.253.8/31\n!\nip routing\nno ip routing vrf\
+    \ MGMT\n!\nmlag configuration\n   domain-id pod2\n   local-interface Vlan4094\n\
+    \   peer-address 10.1.253.9\n   peer-link Port-Channel1\n   reload-delay mlag\
+    \ 300\n   reload-delay non-mlag 330\n!\nmanagement api http-commands\n   protocol\
+    \ https\n   no shutdown\n   !\n   vrf MGMT\n      no shutdown\n!\nend\n"
+  AVD_leaf4: "!RANCID-CONTENT-TYPE: arista\n!\nvlan internal order ascending range\
+    \ 1006 1199\n!\ntransceiver qsfp default-mode 4x10G\n!\nservice routing protocols\
+    \ model multi-agent\n!\nhostname leaf4\n!\nspanning-tree mode mstp\nno spanning-tree\
+    \ vlan-id 4094\nspanning-tree mst 0 priority 16384\n!\nno enable password\nno\
+    \ aaa root\n!\nvlan 10\n   name Ten\n!\nvlan 20\n   name Twenty\n!\nvlan 4094\n\
+    \   name MLAG_PEER\n   trunk group MLAG\n!\nvrf instance MGMT\n!\ninterface Port-Channel1\n\
+    \   description MLAG_PEER_leaf3_Po1\n   no shutdown\n   switchport\n   switchport\
+    \ trunk allowed vlan 2-4094\n   switchport mode trunk\n   switchport trunk group\
+    \ MLAG\n!\ninterface Port-Channel2\n   description SPINE1_Po4\n   no shutdown\n\
+    \   switchport\n   switchport trunk allowed vlan 10,20\n   switchport mode trunk\n\
+    \   mlag 2\n!\ninterface Ethernet1\n   description MLAG_PEER_leaf3_Ethernet1\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Ethernet2\n   description\
+    \ SPINE1_Ethernet5\n   no shutdown\n   channel-group 2 mode active\n!\ninterface\
+    \ Ethernet3\n   description SPINE2_Ethernet5\n   no shutdown\n   channel-group\
+    \ 2 mode active\n!\ninterface Ethernet6\n   description MLAG_PEER_leaf3_Ethernet6\n\
+    \   no shutdown\n   channel-group 1 mode active\n!\ninterface Management1\n  \
+    \ description oob_management\n   no shutdown\n   vrf MGMT\n   ip address 192.168.0.15/24\n\
+    !\ninterface Vlan4094\n   description MLAG_PEER\n   no shutdown\n   mtu 9000\n\
+    \   no autostate\n   ip address 10.1.253.9/31\n!\nip routing\nno ip routing vrf\
+    \ MGMT\n!\nmlag configuration\n   domain-id pod2\n   local-interface Vlan4094\n\
+    \   peer-address 10.1.253.8\n   peer-link Port-Channel1\n   reload-delay mlag\
+    \ 300\n   reload-delay non-mlag 330\n!\nmanagement api http-commands\n   protocol\
+    \ https\n   no shutdown\n   !\n   vrf MGMT\n      no shutdown\n!\nend\n"
+  AVD_spine1: "!RANCID-CONTENT-TYPE: arista\n!\nvlan internal order ascending range\
+    \ 1006 1199\n!\ntransceiver qsfp default-mode 4x10G\n!\nservice routing protocols\
+    \ model multi-agent\n!\nhostname spine1\n!\nspanning-tree mode mstp\nspanning-tree\
+    \ mst 0 priority 4096\n!\nno enable password\nno aaa root\n!\nvlan 10\n   name\
+    \ Ten\n!\nvlan 20\n   name Twenty\n!\nvrf instance MGMT\n!\ninterface Port-Channel2\n\
+    \   description POD1_Po2\n   no shutdown\n   switchport\n   switchport trunk allowed\
+    \ vlan 10,20\n   switchport mode trunk\n!\ninterface Port-Channel4\n   description\
+    \ POD2_Po2\n   no shutdown\n   switchport\n   switchport trunk allowed vlan 10,20\n\
+    \   switchport mode trunk\n!\ninterface Ethernet2\n   description LEAF1_Ethernet2\n\
+    \   no shutdown\n   channel-group 2 mode active\n!\ninterface Ethernet3\n   description\
+    \ LEAF2_Ethernet2\n   no shutdown\n   channel-group 2 mode active\n!\ninterface\
+    \ Ethernet4\n   description LEAF3_Ethernet2\n   no shutdown\n   channel-group\
+    \ 4 mode active\n!\ninterface Ethernet5\n   description LEAF4_Ethernet2\n   no\
+    \ shutdown\n   channel-group 4 mode active\n!\ninterface Management1\n   description\
+    \ oob_management\n   no shutdown\n   vrf MGMT\n   ip address 192.168.0.10/24\n\
+    !\nip routing\nno ip routing vrf MGMT\n!\nmanagement api http-commands\n   protocol\
+    \ https\n   no shutdown\n   !\n   vrf MGMT\n      no shutdown\n!\nend\n"
+  AVD_spine2: "!RANCID-CONTENT-TYPE: arista\n!\nvlan internal order ascending range\
+    \ 1006 1199\n!\ntransceiver qsfp default-mode 4x10G\n!\nservice routing protocols\
+    \ model multi-agent\n!\nhostname spine2\n!\nspanning-tree mode mstp\nspanning-tree\
+    \ mst 0 priority 4096\n!\nno enable password\nno aaa root\n!\nvlan 10\n   name\
+    \ Ten\n!\nvlan 20\n   name Twenty\n!\nvrf instance MGMT\n!\ninterface Port-Channel2\n\
+    \   description POD1_Po2\n   no shutdown\n   switchport\n   switchport trunk allowed\
+    \ vlan 10,20\n   switchport mode trunk\n!\ninterface Port-Channel4\n   description\
+    \ POD2_Po2\n   no shutdown\n   switchport\n   switchport trunk allowed vlan 10,20\n\
+    \   switchport mode trunk\n!\ninterface Ethernet2\n   description LEAF1_Ethernet3\n\
+    \   no shutdown\n   channel-group 2 mode active\n!\ninterface Ethernet3\n   description\
+    \ LEAF2_Ethernet3\n   no shutdown\n   channel-group 2 mode active\n!\ninterface\
+    \ Ethernet4\n   description LEAF3_Ethernet3\n   no shutdown\n   channel-group\
+    \ 4 mode active\n!\ninterface Ethernet5\n   description LEAF4_Ethernet3\n   no\
+    \ shutdown\n   channel-group 4 mode active\n!\ninterface Management1\n   description\
+    \ oob_management\n   no shutdown\n   vrf MGMT\n   ip address 192.168.0.11/24\n\
+    !\nip routing\nno ip routing vrf MGMT\n!\nmanagement api http-commands\n   protocol\
+    \ https\n   no shutdown\n   !\n   vrf MGMT\n      no shutdown\n!\nend\n"
+CVP_TOPOLOGY:
+  ATD_FABRIC:
+    parent_container: Tenant
+  ATD_LEAFS:
+    parent_container: ATD_FABRIC
+  ATD_SERVERS:
+    devices: []
+    parent_container: ATD_FABRIC
+  ATD_SPINES:
+    devices:
+    - spine1
+    - spine2
+    parent_container: ATD_FABRIC
+  ATD_TENANTS_NETWORKS:
+    devices: []
+    parent_container: ATD_FABRIC
+  pod1:
+    devices:
+    - leaf1
+    - leaf2
+    parent_container: ATD_LEAFS
+  pod2:
+    devices:
+    - leaf3
+    - leaf4
+    parent_container: ATD_LEAFS
+changed: false

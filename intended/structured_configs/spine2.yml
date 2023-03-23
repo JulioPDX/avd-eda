@@ -1,0 +1,90 @@
+service_routing_protocols_model: multi-agent
+ip_routing: true
+vlan_internal_order:
+  allocation: ascending
+  range:
+    beginning: 1006
+    ending: 1199
+spanning_tree:
+  mode: mstp
+  mst_instances:
+    '0':
+      priority: 4096
+vrfs:
+  MGMT:
+    ip_routing: false
+management_interfaces:
+  Management0:
+    description: oob_management
+    shutdown: false
+    vrf: MGMT
+    ip_address: 192.168.0.11/24
+    gateway: null
+    type: oob
+management_api_http:
+  enable_vrfs:
+    MGMT: {}
+  enable_https: true
+ethernet_interfaces:
+  Ethernet2:
+    peer: leaf1
+    peer_interface: Ethernet3
+    peer_type: leaf
+    description: LEAF1_Ethernet3
+    shutdown: false
+    type: switched
+    channel_group:
+      id: 2
+      mode: active
+  Ethernet3:
+    peer: leaf2
+    peer_interface: Ethernet3
+    peer_type: leaf
+    description: LEAF2_Ethernet3
+    shutdown: false
+    type: switched
+    channel_group:
+      id: 2
+      mode: active
+  Ethernet4:
+    peer: leaf3
+    peer_interface: Ethernet3
+    peer_type: leaf
+    description: LEAF3_Ethernet3
+    shutdown: false
+    type: switched
+    channel_group:
+      id: 4
+      mode: active
+  Ethernet5:
+    peer: leaf4
+    peer_interface: Ethernet3
+    peer_type: leaf
+    description: LEAF4_Ethernet3
+    shutdown: false
+    type: switched
+    channel_group:
+      id: 4
+      mode: active
+port_channel_interfaces:
+  Port-Channel2:
+    description: POD1_Po2
+    type: switched
+    shutdown: false
+    mode: trunk
+    vlans: 10,20
+  Port-Channel4:
+    description: POD2_Po2
+    type: switched
+    shutdown: false
+    mode: trunk
+    vlans: 10,20
+vlans:
+  10:
+    tenant: MY_FABRIC
+    name: Ten
+  20:
+    tenant: MY_FABRIC
+    name: Twenty
+ip_igmp_snooping:
+  globally_enabled: true

@@ -1,0 +1,62 @@
+---
+all:
+  children:
+    cv_servers:
+      hosts:
+        cv_atd1:
+          ansible_host: port-config-1-6d7ec6de.topo.testdrive.arista.com
+          cv_collection: v3
+          execute_tasks: false
+    ATD_LAB:
+      children:
+        ATD_FABRIC:
+          children:
+            ATD_SPINES:
+              vars:
+                type: spine
+              hosts:
+                spine1:
+                  ansible_host: 192.168.0.10
+                spine2:
+                  ansible_host: 192.168.0.11
+            ATD_LEAFS:
+              vars:
+                type: leaf
+              children:
+                pod1:
+                  hosts:
+                    leaf1:
+                      ansible_host: 192.168.0.12
+                    leaf2:
+                      ansible_host: 192.168.0.13
+                pod2:
+                  hosts:
+                    leaf3:
+                      ansible_host: 192.168.0.14
+                    leaf4:
+                      ansible_host: 192.168.0.15
+            ATD_TENANTS_NETWORKS:
+              children:
+                ATD_LEAFS:
+                ATD_SPINES:
+            ATD_SERVERS:
+              children:
+                ATD_LEAFS:
+                ATD_SPINES:
+
+  vars:
+    ansible_user: arista
+    ansible_password: aristak1ov
+    ansible_network_os: arista.eos.eos
+    # Configure privilege escalation
+    ansible_become: true
+    ansible_become_method: enable
+    # HTTPAPI configuration
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    ansible_python_interpreter: $(which python3)
+    mgmt_gateway: 192.168.0.1
+    mgmt_interface: Management0
+    mgmt_interface_vrf: default
