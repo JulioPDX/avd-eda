@@ -1,0 +1,5 @@
+Ethernet4:
+  description: stuff
+  mode: access
+  spanning: edge
+  vlan: 20

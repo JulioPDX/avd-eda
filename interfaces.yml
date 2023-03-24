@@ -1,0 +1,44 @@
+- name: Configure interfaces with CVP
+  hosts: cv_servers
+  gather_facts: false
+  tasks:
+    - name: set node name as Facts
+      set_fact:
+        node: "{{ ansible_eda.event.payload['message'] | split(' ') | last }}"
+
+    - name: Include interface variables
+      include_vars:
+        file: "/home/juliopdx/git/port-config/custom_interfaces/{{ node }}.yml"
+        name: interfaces
+
+    - name: Include configlet variables for leaf1
+      set_fact:
+        configlet_list:
+          "interface-leaf1": "{{ lookup('template', '/home/juliopdx/git/port-config/templates/interfaces.j2') }}"
+        cvp_devices:
+          - fqdn: "{{ node }}.atd.lab"
+            parentContainerName: pod1
+            configlets:
+              - "interface-leaf1"
+      when: node == "leaf1"
+
+    - name: Include configlet variables for leaf2
+      set_fact:
+        configlet_list:
+          "interface-leaf2": "{{ lookup('template', '/home/juliopdx/git/port-config/templates/interfaces.j2') }}"
+        cvp_devices:
+          - fqdn: "{{ node }}.atd.lab"
+            parentContainerName: pod1
+            configlets:
+              - "interface-leaf2"
+      when: node == "leaf2"
+
+    - name: Create configlets on CVP
+      arista.cvp.cv_configlet_v3:
+        configlets: "{{ configlet_list }}"
+
+    - name: Configure devices on CVP
+      arista.cvp.cv_device_v3:
+        devices: "{{ cvp_devices }}"
+        state: present
+        search_key: fqdn

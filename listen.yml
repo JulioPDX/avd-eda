@@ -13,10 +13,8 @@
 
   rules:
     - name: look for interface config
-      condition: event.payload.message == "Ansible is super cool"
-
-  ## Define the action we should take should the condition be met
-
+      condition: event.payload.message is regex("Configure interfaces on leaf[0-4]", ignorecase=true)
+      # condition: event.payload.message == "Ansible is super cool"
       action:
         run_playbook:
           name: interfaces.yml

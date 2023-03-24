@@ -1,0 +1,7 @@
+{% for interface, value in interfaces.items() %}
+interface {{ interface }}
+   description {{ value['description'] }}
+   switchport mode {{ value['mode'] }}
+   switchport access vlan {{ value['vlan'] }}
+!
+{% endfor %}

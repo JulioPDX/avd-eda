@@ -1,0 +1,5 @@
+Ethernet4:
+  description: another awesome description 456
+  mode: access
+  spanning: edge
+  vlan: 20

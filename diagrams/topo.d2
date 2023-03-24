@@ -1,0 +1,20 @@
+Workflow: {
+  x: Request
+  x: {
+    shape: person
+  }
+  database
+  yaml files
+  REST-API
+  Ansible EDA: Ansible event-driven automation
+  x -> REST-API: Form submission
+  REST-API -> Ansible EDA: Webhook
+  REST-API -> database
+  REST-API -> yaml files
+  database -> Playbook
+  yaml files -> playbook
+  Playbook
+  Ansible EDA -- Playbook: Run playbook on condition
+  CVP
+  Playbook -> CVP: Configure configlets
+}
