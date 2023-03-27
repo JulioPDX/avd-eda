@@ -133,6 +133,7 @@ vlan internal order ascending range 1006 1199
 | ------- | ---- | ------------ |
 | 10 | Ten | - |
 | 20 | Twenty | - |
+| 30 | Thirty | - |
 
 ## VLANs Device Configuration
 
@@ -143,6 +144,9 @@ vlan 10
 !
 vlan 20
    name Twenty
+!
+vlan 30
+   name Thirty
 ```
 
 # Interfaces
@@ -155,10 +159,10 @@ vlan 20
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet2 | LEAF1_Ethernet3 | *trunk | *10,20 | *- | *- | 2 |
-| Ethernet3 | LEAF2_Ethernet3 | *trunk | *10,20 | *- | *- | 2 |
-| Ethernet4 | LEAF3_Ethernet3 | *trunk | *10,20 | *- | *- | 4 |
-| Ethernet5 | LEAF4_Ethernet3 | *trunk | *10,20 | *- | *- | 4 |
+| Ethernet2 | LEAF1_Ethernet3 | *trunk | *10,20,30 | *- | *- | 2 |
+| Ethernet3 | LEAF2_Ethernet3 | *trunk | *10,20,30 | *- | *- | 2 |
+| Ethernet4 | LEAF3_Ethernet3 | *trunk | *10,20,30 | *- | *- | 4 |
+| Ethernet5 | LEAF4_Ethernet3 | *trunk | *10,20,30 | *- | *- | 4 |
 
 *Inherited from Port-Channel Interface
 
@@ -195,8 +199,8 @@ interface Ethernet5
 
 | Interface | Description | Type | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ---- | ----- | ----------- | ------------| --------------------- | ------------------ | ------- | -------- |
-| Port-Channel2 | POD1_Po2 | switched | trunk | 10,20 | - | - | - | - | - | - |
-| Port-Channel4 | POD2_Po2 | switched | trunk | 10,20 | - | - | - | - | - | - |
+| Port-Channel2 | POD1_Po2 | switched | trunk | 10,20,30 | - | - | - | - | - | - |
+| Port-Channel4 | POD2_Po2 | switched | trunk | 10,20,30 | - | - | - | - | - | - |
 
 ### Port-Channel Interfaces Device Configuration
 
@@ -206,14 +210,14 @@ interface Port-Channel2
    description POD1_Po2
    no shutdown
    switchport
-   switchport trunk allowed vlan 10,20
+   switchport trunk allowed vlan 10,20,30
    switchport mode trunk
 !
 interface Port-Channel4
    description POD2_Po2
    no shutdown
    switchport
-   switchport trunk allowed vlan 10,20
+   switchport trunk allowed vlan 10,20,30
    switchport mode trunk
 ```
 

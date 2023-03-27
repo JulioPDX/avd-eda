@@ -4,7 +4,7 @@ all:
     cv_servers:
       hosts:
         cv_atd1:
-          ansible_host: port-config-1-6d7ec6de.topo.testdrive.arista.com
+          ansible_host: # update me
           cv_collection: v3
           execute_tasks: false
     ATD_LAB:
@@ -46,7 +46,7 @@ all:
 
   vars:
     ansible_user: arista
-    ansible_password: aristak1ov
+    ansible_password: # update me
     ansible_network_os: arista.eos.eos
     # Configure privilege escalation
     ansible_become: true

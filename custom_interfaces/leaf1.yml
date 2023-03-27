@@ -1,5 +1,10 @@
 Ethernet4:
-  description: another awesome description 456
+  description: AWESOME
+  mode: access
+  spanning: edge
+  vlan: 10
+Ethernet5:
+  description: stuff
   mode: access
   spanning: edge
   vlan: 20
